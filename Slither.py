@@ -34,6 +34,8 @@ largefont = font = pygame.font.SysFont('segoeui', 80)
 
 def pause():
     paused = True
+    message_to_screen("Paused", white, -100, size = "large")
+    message_to_screen("Press C to continue or Q to quit." , blue, 25)
     while paused:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -48,9 +50,6 @@ def pause():
                     pygame.quit()
                     quit()
                     
-            gameDisplay.fill(black)
-            message_to_screen("Paused", white, -100, size = "large")
-            message_to_screen("Press C to continue or Q to quit." , blue, 25)
             pygame.display.update()
             clock.tick(5)
 
@@ -139,8 +138,7 @@ def gameLoop():
     
     while not gameExit:
         
-        while gameOver == True:
-            gameDisplay.fill(black)
+        if gameOver == True:
             message_to_screen("Game over", red, y_displace =-50, size = "large")
             message_to_screen("Press C to play again or Q to quit", white, 50, size = 'medium')
             pygame.display.update()
