@@ -1,4 +1,5 @@
 import pygame
+import time
 import random
 
 pygame.init()
@@ -10,15 +11,15 @@ green = (0,255,0)
 blue = (0,0,255)
 
 display_width = 800
-display_height = 700
+display_height = 600
 
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Slither')
-icon = pygame.image.load('apple.png')
+icon = pygame.image.load('/home/ethan/Documents/Pygame/apple.png')
 pygame.display.set_icon (icon)
 
-img = pygame.image.load('snakehead.png')
-appleimg = pygame.image.load ('apple.png')
+img = pygame.image.load('/home/ethan/Documents/Pygame/snakehead.png')
+appleimg = pygame.image.load ('/home/ethan/Documents/Pygame/apple.png')
 
 clock = pygame.time.Clock()
 
@@ -28,12 +29,15 @@ FPS = 15
 
 direction = "right"
 
-smallfont = font = pygame.font.SysFont('segoeui', 25)
-medfont = font = pygame.font.SysFont('segoeui', 50)
-largefont = font = pygame.font.SysFont('segoeui', 80)
+smallfont = font = pygame.font.SysFont('comicsansms', 25)
+medfont = font = pygame.font.SysFont('comicsansms', 50)
+largefont = font = pygame.font.SysFont('comicsansms', 80)
 
 def pause():
     paused = True
+    message_to_screen("Paused", white, -100, size = "large")
+    message_to_screen("Press C to continue or Q to quit." , blue, 25)
+    pygame.display.update()
     while paused:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -48,10 +52,7 @@ def pause():
                     pygame.quit()
                     quit()
                     
-            gameDisplay.fill(black)
-            message_to_screen("Paused", white, -100, size = "large")
-            message_to_screen("Press C to continue or Q to quit." , blue, 25)
-            pygame.display.update()
+#            gameDisplay.fill(black)
             clock.tick(5)
 
 def score(score):
@@ -138,12 +139,11 @@ def gameLoop():
     randAppleX,randAppleY = randAppleGen()
     
     while not gameExit:
-        
-        while gameOver == True:
-            gameDisplay.fill(black)
+        if gameOver == True:
             message_to_screen("Game over", red, y_displace =-50, size = "large")
             message_to_screen("Press C to play again or Q to quit", white, 50, size = 'medium')
             pygame.display.update()
+        while gameOver == True:
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
